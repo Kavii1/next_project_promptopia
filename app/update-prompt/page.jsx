@@ -4,7 +4,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import Form from "@components/Form";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const EditPrompt = () => {
+const EditFormCotent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const promptId = searchParams.get("id");
@@ -51,14 +51,20 @@ const EditPrompt = () => {
     }, [promptId]);
 
     return (
+        <Form
+            type="Edit"
+            post={post}
+            setPost={setPost}
+            submitting={submitting}
+            handleSubmit={updatePrompt}
+        />
+    );
+};
+
+const EditPrompt = () => {
+    return (
         <Suspense>
-            <Form
-                type="Edit"
-                post={post}
-                setPost={setPost}
-                submitting={submitting}
-                handleSubmit={updatePrompt}
-            />
+            <EditFormCotent />
         </Suspense>
     );
 };

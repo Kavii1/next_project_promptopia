@@ -4,7 +4,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import Profile from "@components/Profile";
 import { useSearchParams } from "next/navigation";
 
-const MyProfile = ({ params }) => {
+const ProfileContent = ({ params }) => {
     const [posts, setPosts] = useState([]);
     const searchParams = useSearchParams();
     const userName = searchParams.get("name");
@@ -20,12 +20,18 @@ const MyProfile = ({ params }) => {
     }, [params.id]);
 
     return (
+        <Profile
+            name={userName}
+            description={`Welcome to ${userName}'s personalised profile page. Explore ${userName}'s exceptional prompts and be inspired by the power of their imagination.`}
+            data={posts}
+        />
+    );
+};
+
+const MyProfile = ({ params }) => {
+    return (
         <Suspense>
-            <Profile
-                name={userName}
-                description={`Welcome to ${userName}'s personalised profile page. Explore ${userName}'s exceptional prompts and be inspired by the power of their imagination.`}
-                data={posts}
-            />
+            <ProfileContent params={params} />
         </Suspense>
     );
 };

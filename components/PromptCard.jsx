@@ -20,9 +20,13 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     };
 
     const handleProfileClick = () => {
-        router.push(
-            `/profile/${post.creator._id}?name=${post.creator.username}`
-        );
+        if (post.creator._id === session?.user.id) {
+            router.push(`/profile`);
+        } else {
+            router.push(
+                `/profile/${post.creator._id}?name=${post.creator.username}`
+            );
+        }
     };
 
     return (
